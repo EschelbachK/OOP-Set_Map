@@ -1,17 +1,39 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Hauptklasse zur Demonstration der Apotheke
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Erstellt eine neue Apotheke
+        Pharmacy pharmacy = new Pharmacy();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        // Erstellt einige Medikamente
+        Medication ibuprofen = new Medication("Ibuprofen", 4.99, true);
+        Medication paracetamol = new Medication("Paracetamol", 3.49, true);
+        Medication aspirin = new Medication("Aspirin", 5.99, false);
+
+        // Fügt die Medikamente in die Apotheke ein
+        pharmacy.save(ibuprofen);
+        pharmacy.save(paracetamol);
+        pharmacy.save(aspirin);
+
+        // Gibt alle gespeicherten Medikamente aus
+        System.out.println("Alle Medikamente:");
+        pharmacy.printAllMedications();
+
+        // Sucht nach einem bestimmten Medikament
+        System.out.println("\nMedikament finden: Paracetamol");
+        Medication found = pharmacy.find("Paracetamol");
+        System.out.println(found != null ? found : "Nicht gefunden");
+
+        // Löscht ein Medikament
+        System.out.println("\nParacetamol löschen...");
+        pharmacy.delete("Paracetamol");
+
+        // Gibt die Anzahl der verbleibenden Medikamente aus
+        System.out.println("\nAnzahl Medikamente: " + pharmacy.getCount());
+
+        // Gibt die restlichen Medikamente aus
+        System.out.println("Alle Medikamente nach Löschung:");
+        pharmacy.printAllMedications();
     }
 }
